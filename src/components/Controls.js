@@ -18,7 +18,8 @@ export default function Controls(props) {
       }>Left</button>
 
     {/* right */}
-    <button disabled={!isRunning}
+    <button
+      disabled={!isRunning}
       className="control-button"
       onClick={(e) => {
           dispatch(moveRight());
@@ -26,7 +27,8 @@ export default function Controls(props) {
       }>Right</button>
 
     {/* rotate */}
-    <button disabled={!isRunning}
+    <button
+      disabled={!isRunning}
       className="control-button"
       onClick={(e) => {
           dispatch(rotate());
