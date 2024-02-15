@@ -53,8 +53,8 @@ export const gameSlice = createSlice({
 			}
 
 			// Update the score based on if rows were completed or not
-			state.score += checkRows(newGrid)
-			return state
+			state.score += checkRows(newGrid);
+			return state;
 		},
     rotate: (state) => {
       const { shape, grid, x, y, rotation } = state
