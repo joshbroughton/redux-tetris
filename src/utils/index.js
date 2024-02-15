@@ -87,6 +87,53 @@ export const canMoveTo = (shape, grid, x, y, rotation) => {
   return true
 }
 
+// Adds current shape to grid
+export const addBlockToGrid = (shape, grid, x, y, rotation) => {
+  const block = shapes[shape][rotation];
+  // Copy the grid
+  const newGrid = [...grid];
+  // Map the Block onto the grid
+  for (let row = 0; row < block.length; row++) {
+    for (let col = 0; col < block[row].length; col++) {
+      if (block[row][col]) {
+        newGrid[row + y][col + x] = shape;
+      }
+    }
+  }
+  return newGrid;
+}
+
+export const checkRows = (grid) => {
+  const rows = grid.length;
+  const cols = grid[0].length;
+  let count = 0;
+  for (let row = 0; row < rows; row++) {
+    let countRow = true;
+    for (let col = 0; col < cols; col++) {
+      if (grid[row][col] === 0) {
+        countRow = false;
+      }
+    }
+    if (countRow) {
+      count++;
+      grid.splice(row, 1)
+      grid.unshift(Array(10).fill(0))
+    }
+  }
+  switch (count) {
+    case 1:
+      return 40;
+    case 2:
+      return 100;
+    case 3:
+      return 300;
+    case 4:
+      return 1200;
+    default:
+      return 0;
+  }
+}
+
 // Define block shapes and their rotations as arrays.
 export const shapes = [
   // none
