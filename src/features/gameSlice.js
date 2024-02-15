@@ -22,7 +22,7 @@ export const gameSlice = createSlice({
     },
     moveRight: (state) => {
       const { shape, grid, x, y, rotation } = state
-      if (canMoveTo(shape, grid, x - 1, y, rotation)) {
+      if (canMoveTo(shape, grid, x + 1, y, rotation)) {
         state.x = x + 1
       }
       return state;
@@ -39,8 +39,11 @@ export const gameSlice = createSlice({
 					return state
 			}
 			// If not place the block
-			const newGrid = addBlockToGrid(shape, grid, x, y, rotation)
-
+			const { newGrid, gameOver} = addBlockToGrid(shape, grid, x, y, rotation)
+      if (gameOver) {
+        state.gameOver = true;
+        return state
+      }
 			// reset some things to start a new shape/block
 			state.x = 3
 			state.y = -4

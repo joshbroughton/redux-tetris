@@ -89,6 +89,7 @@ export const canMoveTo = (shape, grid, x, y, rotation) => {
 
 // Adds current shape to grid
 export const addBlockToGrid = (shape, grid, x, y, rotation) => {
+  let gameOver = false;
   const block = shapes[shape][rotation];
   // Copy the grid
   const newGrid = [...grid];
@@ -96,11 +97,15 @@ export const addBlockToGrid = (shape, grid, x, y, rotation) => {
   for (let row = 0; row < block.length; row++) {
     for (let col = 0; col < block[row].length; col++) {
       if (block[row][col]) {
-        newGrid[row + y][col + x] = shape;
+        if ((row + y) < 0) {
+          gameOver = true;
+        } else {
+          newGrid[row + y][col + x] = shape;
+        }
       }
     }
   }
-  return newGrid;
+  return { newGrid, gameOver };
 }
 
 export const checkRows = (grid) => {
